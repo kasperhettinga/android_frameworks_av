@@ -243,7 +243,7 @@ void Camera2ClientBase<TClientBase>::notifyAutoFocus(uint8_t newState,
 
     typename SharedCameraCallbacks::Lock l(mSharedCameraCallbacks);
     if (l.mRemoteCallback != 0) {
-        l.mRemoteCallback->notifyCallback(CAMERA_MSG_FOCUS_MOVE, 1, 0);
+        l.mRemoteCallback->notifyCallback(CAMERA_MSG_FOCUS, 1, 0);
     }
     if (l.mRemoteCallback != 0) {
         l.mRemoteCallback->notifyCallback(CAMERA_MSG_FOCUS, 1, 0);
