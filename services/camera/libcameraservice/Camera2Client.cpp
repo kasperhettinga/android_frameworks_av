@@ -1509,7 +1509,7 @@ void Camera2Client::notifyAutoFocus(uint8_t newState, int triggerId) {
     if (sendMovingMessage) {
         SharedCameraCallbacks::Lock l(mSharedCameraCallbacks);
         if (l.mRemoteCallback != 0) {
-            l.mRemoteCallback->notifyCallback(CAMERA_MSG_FOCUS_MOVE,
+            l.mRemoteCallback->notifyCallback(CAMERA_MSG_FOCUS,
                     afInMotion ? 1 : 0, 0);
         }
     }
