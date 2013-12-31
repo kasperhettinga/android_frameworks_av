@@ -515,15 +515,18 @@ bool AudioPolicyService::isStreamActive(audio_stream_type_t stream, uint32_t inP
 
 bool AudioPolicyService::isStreamActiveRemotely(audio_stream_type_t stream, uint32_t inPastMs) const
 {
+#ifndef ICS_AUDIO_BLOB //NEW_P4HELPER_ADDED
     if (mpAudioPolicy == NULL) {
         return 0;
     }
     Mutex::Autolock _l(mLock);
     return mpAudioPolicy->is_stream_active_remotely(mpAudioPolicy, stream, inPastMs);
+#endif
+    return 0;
 }
-
 bool AudioPolicyService::isSourceActive(audio_source_t source) const
 {
+#ifndef ICS_AUDIO_BLOB //NEW_P4HELPER_ADDED
     if (mpAudioPolicy == NULL) {
         return false;
     }
@@ -532,6 +535,8 @@ bool AudioPolicyService::isSourceActive(audio_source_t source) const
     }
     Mutex::Autolock _l(mLock);
     return mpAudioPolicy->is_source_active(mpAudioPolicy, source);
+#endif
+    return false;
 }
 
 status_t AudioPolicyService::queryDefaultPreProcessing(int audioSession,
