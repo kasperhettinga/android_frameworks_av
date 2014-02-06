@@ -82,7 +82,7 @@ status_t AudioStreamOutSink::getNextWriteTimestamp(int64_t *timestamp) {
 #endif
 }
 
-#ifndef HAVE_PRE_KITKAT_AUDIO_BLOB
+#ifndef ICS_AUDIO_BLOB //NEW_P4HELPER_ADDED
 status_t AudioStreamOutSink::getTimestamp(AudioTimestamp& timestamp)
 {
     if (mStream->get_presentation_position == NULL) {

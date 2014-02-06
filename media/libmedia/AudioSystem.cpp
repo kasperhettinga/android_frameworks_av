@@ -816,10 +816,15 @@ void AudioSystem::clearAudioConfigCache()
 
 bool AudioSystem::isOffloadSupported(const audio_offload_info_t& info)
 {
+#ifndef ICS_AUDIO_BLOB //NEW_P4HELPER_ADDED
     ALOGV("isOffloadSupported()");
     const sp<IAudioPolicyService>& aps = AudioSystem::get_audio_policy_service();
     if (aps == 0) return false;
     return aps->isOffloadSupported(info);
+#else
+	ALOGV("isOffloadSupported() non existent in ICS, false");
+	return false;
+#endif
 }
 
 // ---------------------------------------------------------------------------
@@ -830,6 +835,16 @@ void AudioSystem::AudioPolicyServiceClient::binderDied(const wp<IBinder>& who) {
 
     ALOGW("AudioPolicyService server died!");
 }
+
+#ifdef ICS_AUDIO_BLOB //NEW_P4HELPER_ADDED
+extern "C" bool _ZN7android11AudioSystem17isSeparatedStreamE19audio_stream_type_t(audio_stream_type_t stream)
+{
+    ALOGD("audio_stream_type_t: %d", stream);
+    ALOGD("isSeparatedStream: true");
+	//whatever you set this to doesn't make a difference
+    return true;
+}
+#endif
 
 #ifdef USE_SAMSUNG_SEPARATEDSTREAM
 extern "C" bool _ZN7android11AudioSystem17isSeparatedStreamE19audio_stream_type_t(audio_stream_type_t stream)

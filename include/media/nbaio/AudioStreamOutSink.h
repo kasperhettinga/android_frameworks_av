@@ -52,7 +52,7 @@ public:
     // implementation of GNWT (if any)
     virtual status_t getNextWriteTimestamp(int64_t *timestamp);
 
-#ifndef HAVE_PRE_KITKAT_AUDIO_BLOB
+#ifndef ICS_AUDIO_BLOB //NEW_P4HELPER_ADDED
     virtual status_t getTimestamp(AudioTimestamp& timestamp);
 #endif
 
